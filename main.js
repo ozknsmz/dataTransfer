@@ -201,13 +201,7 @@ function sendData() {
   // Handle 0 size files.
   statusMessage.textContent = "";
   downloadAnchor.textContent = "";
-  if (file.size === 0) {
-    createAnswer;
-    bitrateDiv.innerHTML = "";
-    statusMessage.textContent = "File is empty, please select a non-empty file";
-    closeDataChannels();
-    return;
-  }
+
   sendProgress.max = file.size;
   receiveProgress.max = file.size;
   const chunkSize = 16384;
@@ -274,9 +268,6 @@ function onReceiveMessageCallback(event) {
   receivedSize += event.data.byteLength;
   receiveProgress.value = receivedSize;
 
-  // we are assuming that our signaling protocol told
-  // about the expected file size (and name, hash, etc).
-  //const file = fileInput.files[0];
   console.log(receivedSize);
   console.log(fileSizeInfoReceived);
 
